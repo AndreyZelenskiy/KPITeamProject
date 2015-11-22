@@ -58,6 +58,9 @@ namespace EP
             {
                 string[] data = client.GetUser(element);
                 users.Add(new User(data[0], data[1], data[2], data[3], element));
+                List<MyDict> newlist = new List<MyDict>();
+                newlist.Add(new MyDict(data[0], "Created"));
+                mainUser.list.Add(newlist); 
             }
             ContactListRefresher();
         }
@@ -86,15 +89,15 @@ namespace EP
 
         private void ClientForm_Load(object sender, EventArgs e)
         {
-            GetList();
             MainUserCreation();
+            GetList();
             TaskLoader();
         }
 
         private void ContactBox_SelectedIndexChanged(object sender, EventArgs e) // тут все ясно
         {         
             int index  = ContactListBox.SelectedIndex;
-            ContactForm Contact = new ContactForm(this, users[index]);
+            ContactForm Contact = new ContactForm(this, users[index], mainUser.ListReturner(users[index].firstname));
             Contact.Show();
         }
 
@@ -122,6 +125,12 @@ namespace EP
                     {
                         users.Add(new User(newUserStr[0], newUserStr[1], newUserStr[2], newUserStr[3], id));
                         client.AddFriend(mainUser.Id, id);
+                        if (mainUser.Check(newUserStr[0]) == false)
+                        {
+                            List<MyDict> list = new List<MyDict>();
+                            list.Add(new MyDict(newUserStr[0], "Created"));
+                            mainUser.list.Add(list);
+                        }
                     }
                 }
             }

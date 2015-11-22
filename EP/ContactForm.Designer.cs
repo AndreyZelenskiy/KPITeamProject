@@ -202,6 +202,7 @@
             this.Controls.Add(this.ProfilePict);
             this.Name = "ContactForm";
             this.Text = "ContactForm";
+            this.Load += new System.EventHandler(this.ContactForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.ProfilePict)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

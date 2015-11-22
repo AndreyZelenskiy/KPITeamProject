@@ -15,17 +15,18 @@ namespace EP
         public List<MyDict> list;
         User user;       
         private ClientForm _f1;
-        public ContactForm(ClientForm f1, User user)
+        public ContactForm(ClientForm f1, User user, List<MyDict> l)
         {
             InitializeComponent();
             _f1 = f1;
-            list = new List<MyDict>();
+            list = l;
             this.user = user;
             LastNameInfoBox.Text = user.secondname;
             FstNameInfoBox.Text = user.firstname;
             LoginInfoBox.Text = user.login;
             ProgLangInfoBox.Text = user.language;
             textBox1.Text = Message();
+
         }
 
         private string Message()
@@ -57,8 +58,12 @@ namespace EP
 
         private void button1_Click(object sender, EventArgs e)
         {
-            MessHist messhist = new MessHist(this);
+            MessHist messhist = new MessHist(this, _f1.mainUser.ListReturner(user.firstname));
             messhist.Show();
+        }
+
+        private void ContactForm_Load(object sender, EventArgs e)
+        {
         }
     }
 }

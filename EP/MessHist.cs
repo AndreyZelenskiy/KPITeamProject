@@ -13,18 +13,20 @@ namespace EP
     public partial class MessHist : Form
     {
         private string mainstr;
+        List<MyDict> list;
         private ContactForm cnt;
-        public MessHist(ContactForm cnt)
+        public MessHist(ContactForm cnt, List<MyDict> l)
         {
             InitializeComponent();
             this.cnt = cnt;
+            list = l;
             MessageHist();
             this.textBox2.Text = mainstr;
         }
 
         private void MessageHist()
         {
-            foreach(MyDict md in cnt.list)
+            foreach(MyDict md in list)
             {
                 mainstr += string.Format(md.name + ": " + md.text + Environment.NewLine);
             }
