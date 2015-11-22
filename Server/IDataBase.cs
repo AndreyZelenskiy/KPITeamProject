@@ -26,7 +26,16 @@ namespace Server
         bool AnswerCheck(int id, int answer);
 
         [OperationContract]
-        int NewTaskAdd(string[] task);
+        Dictionary<int, string[]> TaskList();
+
+        [OperationContract]
+        int AddTask(params string[] task);
+
+        [OperationContract]
+        void SendMessage(int firstid, int secondid, string message);
+
+        [OperationContract]
+        string GetMessage(int firstid, int secondid);
 
         [OperationContract]
         void DeleteFriend(int first_id, int second_id);

@@ -18,11 +18,7 @@ namespace EP
         public List<User> users = new List<User>();
         public List<Task> tasks = new List<Task>();
         int taskIndex = 0;
-        public DataBase.DataBaseClient client;
-        public ClientForm()
-        {
-            InitializeComponent();
-        }
+        public DataBase.DataBaseClient client;     
         private AuthorizationsForm _f1;
         public ClientForm(AuthorizationsForm f1)
         {
@@ -31,7 +27,7 @@ namespace EP
             _f1 = f1;
             
         }
-        public bool Check(int id)
+        public bool Check(int id) // Проверка на айдишники пользователей
         {
             if (_f1.tmpUserId == id)
                 return true;
@@ -44,39 +40,43 @@ namespace EP
             }
             return false;
         }
-        public void MyRefresh()
+        public void ContactListRefresher() // Обновление списка контактов
         {
-            ContactListBox.Items.Clear();
+            ContactListBox.Items.Clear(); // Удаление поэлементно работает неверно, приходиться делать так
             foreach (User user in users)
             {
                 ContactListBox.Items.Add(user.login);
             }
         }
-       
-        private void GetList()
+
+        
+
+        private void GetList() // Получение списка айдишников друзей и закидывание на в список
         {
-            int[] l = client.GetUserFriends(_f1.tmpUserId);
-            foreach (int a in l)
+            int[] list = client.GetUserFriends(_f1.tmpUserId);
+            foreach (int element in list)
             {
-                string[] data = client.GetUser(a);
-                users.Add(new User(data[0], data[1], data[2], data[3], a));
+                string[] data = client.GetUser(element);
+                users.Add(new User(data[0], data[1], data[2], data[3], element));
             }
-            MyRefresh();
+            ContactListRefresher();
         }
 
-        private void MainUserCreation()
+        private void MainUserCreation() // Получение данных пользователя
         {
             string[] userData = client.GetUser(_f1.tmpUserId);
             mainUser = new User(userData[0], userData[1], userData[2], userData[3], _f1.tmpUserId);
         }
 
         private void TaskLoader()
-        {
-            string[] task = File.ReadAllLines(@"d:\text.txt");
-            foreach (string str in task)
+        {          
+            Dictionary<int, string[]> dict = client.TaskList();
+            if(dict != null)
             {
-                string[] tmp = str.Split('#');
-                tasks.Add(new Task(Convert.ToInt32(tmp[0]), tmp[1], tmp[2]));
+                foreach(KeyValuePair<int, string[]> pair in dict)
+                {
+                    tasks.Add(new Task(pair.Key, pair.Value[0], pair.Value[1]));
+                }
             }
             foreach (Task t in tasks)
             {
@@ -91,16 +91,16 @@ namespace EP
             TaskLoader();
         }
 
-        private void ContactBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void ContactBox_SelectedIndexChanged(object sender, EventArgs e) // тут все ясно
         {         
             int index  = ContactListBox.SelectedIndex;
             ContactForm Contact = new ContactForm(this, users[index]);
             Contact.Show();
-    }
+        }
 
-        private void ClientForm_FormClosing(object sender, FormClosingEventArgs e)
+        private void ClientForm_FormClosing(object sender, FormClosingEventArgs e) // тут тоже все ясно
         {
-            
+            Application.Exit();
         }
 
         private void ClientForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -108,7 +108,7 @@ namespace EP
 
         }
 
-        private void ContactBtn_Click(object sender, EventArgs e)
+        private void ContactBtn_Click(object sender, EventArgs e) // Добавление нового друга в список
         {
             if (textBox1.Text != "")
             {
@@ -117,17 +117,18 @@ namespace EP
                     MessageBox.Show("Try again, please");
                 else
                 {
-                    if (!Check(Convert.ToInt32(newUserStr[4])))
+                    int id = Convert.ToInt32(newUserStr[4]);
+                    if (!Check(id))
                     {
-                        users.Add(new User(newUserStr[0], newUserStr[1], newUserStr[2], newUserStr[3], Convert.ToInt32(newUserStr[4])));
-                        client.AddFriend(mainUser.Id, Convert.ToInt32(newUserStr[4]));
+                        users.Add(new User(newUserStr[0], newUserStr[1], newUserStr[2], newUserStr[3], id));
+                        client.AddFriend(mainUser.Id, id);
                     }
                 }
             }
-            MyRefresh();
+            ContactListRefresher();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e) // Отправка ответа на сервер для проверки
         {
             try {
                 if (textBox3.Text != "")
@@ -146,13 +147,13 @@ namespace EP
             }
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void button3_Click(object sender, EventArgs e) // вызов нового окна (если не ясно)
         {
             TaskAdd taskAdd = new TaskAdd(this);
             taskAdd.Show();
         }
         
-        public void TaskRefresher()
+        public void TaskRefresher() //та же проблема, что с френдлистом, но работает
         {
             TaskBox.Items.Clear();
             foreach (Task t in tasks)
@@ -161,7 +162,7 @@ namespace EP
             }
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
+        private void pictureBox1_Click(object sender, EventArgs e) //информация мейн юзера
         {
             MainUserForm userForm = new MainUserForm(this, mainUser);
             userForm.Show();
@@ -171,6 +172,11 @@ namespace EP
         {
             taskIndex = TaskBox.SelectedIndex;
             textBox2.Text = tasks[taskIndex].text;
+        }
+
+        private void button1_Click(object sender, EventArgs e)//Refresher программы
+        {
+            GetList();
         }
     }
 }

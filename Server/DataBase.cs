@@ -25,7 +25,7 @@ namespace Server
             {
                 _connection.Open();
                 if (!_connection.Ping())
-                    Console.WriteLine("DataBase connection is failed");
+                    Log.Write("DataBase connection is failed", false);
                 _connection.Close();
                 Log.Write("Ping and open connection was succeed", true);
             }
@@ -34,13 +34,42 @@ namespace Server
                 Log.Write(ex.Message, false);
             }
         }
-        public int NewTaskAdd(string[] str)
+
+        public void SendMessage(int firstid, int secondid, string message)
         {
-            return 1;
+            DataTable queryResult = GetQuery(string.Format("select * from sendlist where first_id = '{0}' and second_id = '{1}'",
+                firstid, secondid));
+            if (queryResult == null) { Log.Write("SQL query error", false); throw new Exception("SQL query error"); }
+            if(queryResult.Rows.Count > 0)
+            {
+                GetQuery(string.Format("delete from sendlist where first_id = '{0}' and second_id = '{1}'",
+                    firstid, secondid));
+            }
+            GetQuery(string.Format("insert into sendlist(first_id, second_id, message) values('{0}','{1}','{2}')", 
+                firstid, secondid, message));
         }
+
+        public string GetMessage(int firstid, int secondid)
+        {
+            DataTable queryResult = GetQuery(string.Format("select * from sendlist where first_id = '{0}' and second_id = '{1}'",
+                secondid, firstid));
+            if (queryResult == null) { Log.Write("SQL query error", false); throw new Exception("SQL query error"); }
+            if (queryResult.Rows.Count > 0)
+            {
+                return (string)queryResult.Rows[0]["message"];
+            }
+            else return null;
+
+        }
+
         public bool AnswerCheck(int id, int answer)
         {
-            return true;
+            DataTable queryResult = GetQuery(string.Format("select * from tasklist where id = '{0}'", id));
+            if (queryResult == null) { Log.Write("SQL query error", false); throw new Exception("SQL query error"); }
+            if ((int)queryResult.Rows[0]["task_answer"] == answer)
+                return true;
+            else return false;
+
         }
 
         public string[] GetUser(int idUser)
@@ -80,6 +109,39 @@ namespace Server
             result[3] = (string)row["user_programming_language"];
             result[4] = Convert.ToString(row["id_user"]);
             return result;
+        }
+
+        public Dictionary<int, string[]> TaskList()
+        {
+            Dictionary<int, string[]> dict;
+            DataTable queryResult = GetQuery("select * from tasklist");
+            if (queryResult == null) { Log.Write("Failed sql query", false); throw new Exception("Failed sql query"); }
+            dict = new Dictionary<int, string[]>();
+            for (int i = 0; i < queryResult.Rows.Count; i++)
+            {
+                string[] str = new string[2];
+                str[0] = (string)queryResult.Rows[i]["task_name"];
+                str[1] = (string)queryResult.Rows[i]["task_text"];
+                dict.Add((int)queryResult.Rows[i]["id"], str);
+            }
+            return dict;
+        }
+
+        public int AddTask(params string [] task)
+        {
+            string name = task[0];
+            DataTable queryResult = GetQuery(string.Format("select * from tasklist where task_name ='{0}'", name));
+            if (queryResult == null) { Log.Write("Failed sql query", false); throw new Exception("Failed sql query"); }
+            if (queryResult.Rows.Count != 0) return -1;
+            else
+            {
+                GetQuery(string.Format("insert into tasklist(task_name, task_answer, task_text) values ('{0}','{1}','{2}')",
+                    name, task[1], task[2]));
+            }
+            queryResult = GetQuery(string.Format("select * from tasklist where task_name ='{0}'", name));
+            if (queryResult == null) { Log.Write("Failed sql query", false); throw new Exception("Failed sql query"); }
+            if (queryResult.Rows.Count == 1) return 1;
+            else return 0;
         }
 
         public List<int> GetUserFriends(int idUser)

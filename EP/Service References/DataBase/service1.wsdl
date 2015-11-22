@@ -43,11 +43,29 @@
   <wsdl:message name="IDataBase_AnswerCheck_OutputMessage">
     <wsdl:part name="parameters" element="tns:AnswerCheckResponse" />
   </wsdl:message>
-  <wsdl:message name="IDataBase_NewTaskAdd_InputMessage">
-    <wsdl:part name="parameters" element="tns:NewTaskAdd" />
+  <wsdl:message name="IDataBase_TaskList_InputMessage">
+    <wsdl:part name="parameters" element="tns:TaskList" />
   </wsdl:message>
-  <wsdl:message name="IDataBase_NewTaskAdd_OutputMessage">
-    <wsdl:part name="parameters" element="tns:NewTaskAddResponse" />
+  <wsdl:message name="IDataBase_TaskList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:TaskListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataBase_AddTask_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddTask" />
+  </wsdl:message>
+  <wsdl:message name="IDataBase_AddTask_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddTaskResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataBase_SendMessage_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendMessage" />
+  </wsdl:message>
+  <wsdl:message name="IDataBase_SendMessage_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendMessageResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataBase_GetMessage_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetMessage" />
+  </wsdl:message>
+  <wsdl:message name="IDataBase_GetMessage_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetMessageResponse" />
   </wsdl:message>
   <wsdl:message name="IDataBase_DeleteFriend_InputMessage">
     <wsdl:part name="parameters" element="tns:DeleteFriend" />
@@ -86,9 +104,21 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IDataBase/AnswerCheck" message="tns:IDataBase_AnswerCheck_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IDataBase/AnswerCheckResponse" message="tns:IDataBase_AnswerCheck_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="NewTaskAdd">
-      <wsdl:input wsaw:Action="http://tempuri.org/IDataBase/NewTaskAdd" message="tns:IDataBase_NewTaskAdd_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IDataBase/NewTaskAddResponse" message="tns:IDataBase_NewTaskAdd_OutputMessage" />
+    <wsdl:operation name="TaskList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDataBase/TaskList" message="tns:IDataBase_TaskList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDataBase/TaskListResponse" message="tns:IDataBase_TaskList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddTask">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDataBase/AddTask" message="tns:IDataBase_AddTask_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDataBase/AddTaskResponse" message="tns:IDataBase_AddTask_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendMessage">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDataBase/SendMessage" message="tns:IDataBase_SendMessage_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDataBase/SendMessageResponse" message="tns:IDataBase_SendMessage_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMessage">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDataBase/GetMessage" message="tns:IDataBase_GetMessage_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDataBase/GetMessageResponse" message="tns:IDataBase_GetMessage_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="DeleteFriend">
       <wsdl:input wsaw:Action="http://tempuri.org/IDataBase/DeleteFriend" message="tns:IDataBase_DeleteFriend_InputMessage" />
@@ -155,8 +185,35 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="NewTaskAdd">
-      <soap:operation soapAction="http://tempuri.org/IDataBase/NewTaskAdd" style="document" />
+    <wsdl:operation name="TaskList">
+      <soap:operation soapAction="http://tempuri.org/IDataBase/TaskList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddTask">
+      <soap:operation soapAction="http://tempuri.org/IDataBase/AddTask" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendMessage">
+      <soap:operation soapAction="http://tempuri.org/IDataBase/SendMessage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMessage">
+      <soap:operation soapAction="http://tempuri.org/IDataBase/GetMessage" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

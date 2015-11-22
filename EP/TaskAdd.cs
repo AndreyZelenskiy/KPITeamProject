@@ -22,15 +22,25 @@ namespace EP
         {
             if(textBox1.Text != "" && textBox2.Text != "" && textBox3.Text != "")
             {
-                _f.tasks.Add(new Task(_f.tasks.Count, textBox1.Text, textBox3.Text));
-                System.IO.File.AppendAllText(@"d:\text.txt",Environment.NewLine + _f.tasks.Count + "#" + textBox1.Text + "#" + textBox3.Text);
-                return true;
+                string[] task = { textBox1.Text, textBox2.Text, textBox3.Text };
+                int result = _f.client.AddTask(task);
+                switch (result)
+                {
+                    case -1:
+                        MessageBox.Show("Please, choose another name");
+                        textBox1.Clear();
+                        break;
+                    case 1:
+                        _f.tasks.Add(new Task(_f.tasks.Count, textBox1.Text, textBox3.Text));
+                        return true;
+                }
             }
             else
             {
                 MessageBox.Show("Enter the fields!");
                 return false;
             }
+            return false;
         }
 
         private void button1_Click(object sender, EventArgs e)

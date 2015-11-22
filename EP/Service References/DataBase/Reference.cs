@@ -51,11 +51,29 @@ namespace EP.DataBase {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataBase/AnswerCheck", ReplyAction="http://tempuri.org/IDataBase/AnswerCheckResponse")]
         System.Threading.Tasks.Task<bool> AnswerCheckAsync(int id, int answer);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataBase/NewTaskAdd", ReplyAction="http://tempuri.org/IDataBase/NewTaskAddResponse")]
-        int NewTaskAdd(string[] task);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataBase/TaskList", ReplyAction="http://tempuri.org/IDataBase/TaskListResponse")]
+        System.Collections.Generic.Dictionary<int, string[]> TaskList();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataBase/NewTaskAdd", ReplyAction="http://tempuri.org/IDataBase/NewTaskAddResponse")]
-        System.Threading.Tasks.Task<int> NewTaskAddAsync(string[] task);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataBase/TaskList", ReplyAction="http://tempuri.org/IDataBase/TaskListResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<int, string[]>> TaskListAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataBase/AddTask", ReplyAction="http://tempuri.org/IDataBase/AddTaskResponse")]
+        int AddTask(string[] task);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataBase/AddTask", ReplyAction="http://tempuri.org/IDataBase/AddTaskResponse")]
+        System.Threading.Tasks.Task<int> AddTaskAsync(string[] task);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataBase/SendMessage", ReplyAction="http://tempuri.org/IDataBase/SendMessageResponse")]
+        void SendMessage(int firstid, int secondid, string message);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataBase/SendMessage", ReplyAction="http://tempuri.org/IDataBase/SendMessageResponse")]
+        System.Threading.Tasks.Task SendMessageAsync(int firstid, int secondid, string message);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataBase/GetMessage", ReplyAction="http://tempuri.org/IDataBase/GetMessageResponse")]
+        string GetMessage(int firstid, int secondid);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataBase/GetMessage", ReplyAction="http://tempuri.org/IDataBase/GetMessageResponse")]
+        System.Threading.Tasks.Task<string> GetMessageAsync(int firstid, int secondid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataBase/DeleteFriend", ReplyAction="http://tempuri.org/IDataBase/DeleteFriendResponse")]
         void DeleteFriend(int first_id, int second_id);
@@ -145,12 +163,36 @@ namespace EP.DataBase {
             return base.Channel.AnswerCheckAsync(id, answer);
         }
         
-        public int NewTaskAdd(string[] task) {
-            return base.Channel.NewTaskAdd(task);
+        public System.Collections.Generic.Dictionary<int, string[]> TaskList() {
+            return base.Channel.TaskList();
         }
         
-        public System.Threading.Tasks.Task<int> NewTaskAddAsync(string[] task) {
-            return base.Channel.NewTaskAddAsync(task);
+        public System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<int, string[]>> TaskListAsync() {
+            return base.Channel.TaskListAsync();
+        }
+        
+        public int AddTask(string[] task) {
+            return base.Channel.AddTask(task);
+        }
+        
+        public System.Threading.Tasks.Task<int> AddTaskAsync(string[] task) {
+            return base.Channel.AddTaskAsync(task);
+        }
+        
+        public void SendMessage(int firstid, int secondid, string message) {
+            base.Channel.SendMessage(firstid, secondid, message);
+        }
+        
+        public System.Threading.Tasks.Task SendMessageAsync(int firstid, int secondid, string message) {
+            return base.Channel.SendMessageAsync(firstid, secondid, message);
+        }
+        
+        public string GetMessage(int firstid, int secondid) {
+            return base.Channel.GetMessage(firstid, secondid);
+        }
+        
+        public System.Threading.Tasks.Task<string> GetMessageAsync(int firstid, int secondid) {
+            return base.Channel.GetMessageAsync(firstid, secondid);
         }
         
         public void DeleteFriend(int first_id, int second_id) {

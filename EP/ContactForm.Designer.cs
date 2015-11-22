@@ -41,6 +41,8 @@
             this.LastName = new System.Windows.Forms.Label();
             this.ProgLang = new System.Windows.Forms.Label();
             this.NickName = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.ProfilePict)).BeginInit();
             this.SuspendLayout();
             // 
@@ -52,12 +54,13 @@
             this.SendMsgBtn.TabIndex = 2;
             this.SendMsgBtn.Text = "Send";
             this.SendMsgBtn.UseVisualStyleBackColor = true;
+            this.SendMsgBtn.Click += new System.EventHandler(this.SendMsgBtn_Click);
             // 
             // RemovingBtn
             // 
-            this.RemovingBtn.Location = new System.Drawing.Point(165, 153);
+            this.RemovingBtn.Location = new System.Drawing.Point(130, 153);
             this.RemovingBtn.Name = "RemovingBtn";
-            this.RemovingBtn.Size = new System.Drawing.Size(123, 23);
+            this.RemovingBtn.Size = new System.Drawing.Size(115, 33);
             this.RemovingBtn.TabIndex = 3;
             this.RemovingBtn.Text = "Remove from friends";
             this.RemovingBtn.UseVisualStyleBackColor = true;
@@ -73,10 +76,10 @@
             // 
             // MessageBox
             // 
-            this.MessageBox.Location = new System.Drawing.Point(12, 196);
+            this.MessageBox.Location = new System.Drawing.Point(14, 192);
             this.MessageBox.Multiline = true;
             this.MessageBox.Name = "MessageBox";
-            this.MessageBox.Size = new System.Drawing.Size(350, 105);
+            this.MessageBox.Size = new System.Drawing.Size(350, 43);
             this.MessageBox.TabIndex = 1;
             // 
             // ProfilePict
@@ -158,11 +161,32 @@
             this.NickName.TabIndex = 13;
             this.NickName.Text = "Login:";
             // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(14, 258);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
+            this.textBox1.Size = new System.Drawing.Size(350, 43);
+            this.textBox1.TabIndex = 14;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(267, 153);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(97, 33);
+            this.button1.TabIndex = 15;
+            this.button1.Text = "History";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // ContactForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(376, 313);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.NickName);
             this.Controls.Add(this.ProgLang);
             this.Controls.Add(this.LastName);
@@ -199,5 +223,7 @@
         private System.Windows.Forms.Label LastName;
         private System.Windows.Forms.Label ProgLang;
         private System.Windows.Forms.Label NickName;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button button1;
     }
 }
