@@ -1,0 +1,191 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="DataBase" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import namespace="http://tempuri.org/" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IDataBase_Authorizate_InputMessage">
+    <wsdl:part name="parameters" element="tns:Authorizate" />
+  </wsdl:message>
+  <wsdl:message name="IDataBase_Authorizate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AuthorizateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataBase_Registration_InputMessage">
+    <wsdl:part name="parameters" element="tns:Registration" />
+  </wsdl:message>
+  <wsdl:message name="IDataBase_Registration_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RegistrationResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataBase_GetUserFriends_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserFriends" />
+  </wsdl:message>
+  <wsdl:message name="IDataBase_GetUserFriends_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserFriendsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataBase_GetUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUser" />
+  </wsdl:message>
+  <wsdl:message name="IDataBase_GetUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataBase_GetUserByLogin_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserByLogin" />
+  </wsdl:message>
+  <wsdl:message name="IDataBase_GetUserByLogin_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserByLoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataBase_AnswerCheck_InputMessage">
+    <wsdl:part name="parameters" element="tns:AnswerCheck" />
+  </wsdl:message>
+  <wsdl:message name="IDataBase_AnswerCheck_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AnswerCheckResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataBase_NewTaskAdd_InputMessage">
+    <wsdl:part name="parameters" element="tns:NewTaskAdd" />
+  </wsdl:message>
+  <wsdl:message name="IDataBase_NewTaskAdd_OutputMessage">
+    <wsdl:part name="parameters" element="tns:NewTaskAddResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataBase_DeleteFriend_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteFriend" />
+  </wsdl:message>
+  <wsdl:message name="IDataBase_DeleteFriend_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteFriendResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataBase_AddFriend_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddFriend" />
+  </wsdl:message>
+  <wsdl:message name="IDataBase_AddFriend_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddFriendResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IDataBase">
+    <wsdl:operation name="Authorizate">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDataBase/Authorizate" message="tns:IDataBase_Authorizate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDataBase/AuthorizateResponse" message="tns:IDataBase_Authorizate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Registration">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDataBase/Registration" message="tns:IDataBase_Registration_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDataBase/RegistrationResponse" message="tns:IDataBase_Registration_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserFriends">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDataBase/GetUserFriends" message="tns:IDataBase_GetUserFriends_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDataBase/GetUserFriendsResponse" message="tns:IDataBase_GetUserFriends_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDataBase/GetUser" message="tns:IDataBase_GetUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDataBase/GetUserResponse" message="tns:IDataBase_GetUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserByLogin">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDataBase/GetUserByLogin" message="tns:IDataBase_GetUserByLogin_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDataBase/GetUserByLoginResponse" message="tns:IDataBase_GetUserByLogin_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AnswerCheck">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDataBase/AnswerCheck" message="tns:IDataBase_AnswerCheck_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDataBase/AnswerCheckResponse" message="tns:IDataBase_AnswerCheck_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NewTaskAdd">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDataBase/NewTaskAdd" message="tns:IDataBase_NewTaskAdd_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDataBase/NewTaskAddResponse" message="tns:IDataBase_NewTaskAdd_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteFriend">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDataBase/DeleteFriend" message="tns:IDataBase_DeleteFriend_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDataBase/DeleteFriendResponse" message="tns:IDataBase_DeleteFriend_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddFriend">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDataBase/AddFriend" message="tns:IDataBase_AddFriend_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDataBase/AddFriendResponse" message="tns:IDataBase_AddFriend_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IDataBase" type="tns:IDataBase">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Authorizate">
+      <soap:operation soapAction="http://tempuri.org/IDataBase/Authorizate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Registration">
+      <soap:operation soapAction="http://tempuri.org/IDataBase/Registration" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserFriends">
+      <soap:operation soapAction="http://tempuri.org/IDataBase/GetUserFriends" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUser">
+      <soap:operation soapAction="http://tempuri.org/IDataBase/GetUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserByLogin">
+      <soap:operation soapAction="http://tempuri.org/IDataBase/GetUserByLogin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AnswerCheck">
+      <soap:operation soapAction="http://tempuri.org/IDataBase/AnswerCheck" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NewTaskAdd">
+      <soap:operation soapAction="http://tempuri.org/IDataBase/NewTaskAdd" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteFriend">
+      <soap:operation soapAction="http://tempuri.org/IDataBase/DeleteFriend" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddFriend">
+      <soap:operation soapAction="http://tempuri.org/IDataBase/AddFriend" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="DataBase">
+    <wsdl:port name="BasicHttpBinding_IDataBase" binding="tns:BasicHttpBinding_IDataBase">
+      <soap:address location="http://localhost:8733/Design_Time_Addresses/Server/DataBaseService/" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
