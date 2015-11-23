@@ -33,8 +33,6 @@
             this.button1 = new System.Windows.Forms.Button();
             this.ContactBtn = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
             this.TaskBox = new System.Windows.Forms.ListBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
@@ -62,9 +60,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(692, 12);
+            this.button1.Location = new System.Drawing.Point(618, 12);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(126, 52);
+            this.button1.Size = new System.Drawing.Size(200, 52);
             this.button1.TabIndex = 2;
             this.button1.Text = "Refresh";
             this.button1.UseVisualStyleBackColor = true;
@@ -74,7 +72,7 @@
             // 
             this.ContactBtn.Location = new System.Drawing.Point(164, 12);
             this.ContactBtn.Name = "ContactBtn";
-            this.ContactBtn.Size = new System.Drawing.Size(126, 52);
+            this.ContactBtn.Size = new System.Drawing.Size(200, 52);
             this.ContactBtn.TabIndex = 3;
             this.ContactBtn.Text = "Add a friend";
             this.ContactBtn.UseVisualStyleBackColor = true;
@@ -82,31 +80,13 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(296, 12);
+            this.button3.Location = new System.Drawing.Point(392, 12);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(126, 52);
+            this.button3.Size = new System.Drawing.Size(200, 52);
             this.button3.TabIndex = 4;
             this.button3.Text = "Add a new task";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(428, 12);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(126, 52);
-            this.button4.TabIndex = 5;
-            this.button4.Text = "button4";
-            this.button4.UseVisualStyleBackColor = true;
-            // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(560, 12);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(126, 52);
-            this.button5.TabIndex = 6;
-            this.button5.Text = "button5";
-            this.button5.UseVisualStyleBackColor = true;
             // 
             // TaskBox
             // 
@@ -173,8 +153,6 @@
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.TaskBox);
-            this.Controls.Add(this.button5);
-            this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.ContactBtn);
             this.Controls.Add(this.button1);
@@ -198,8 +176,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button ContactBtn;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
         private System.Windows.Forms.ListBox TaskBox;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.TextBox textBox3;
