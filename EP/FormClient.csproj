@@ -60,6 +60,7 @@
     <Compile Include="ClientForm.Designer.cs">
       <DependentUpon>ClientForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="CodeParser.cs" />
     <Compile Include="ContactForm.cs">
       <SubType>Form</SubType>
     </Compile>

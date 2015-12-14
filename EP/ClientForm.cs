@@ -15,6 +15,7 @@ namespace EP
     public partial class ClientForm : Form
     {
         public User mainUser;
+        private CodeParser parser;
         public List<User> users = new List<User>();
         public List<Task> tasks = new List<Task>();
         int taskIndex = 0;
@@ -24,6 +25,7 @@ namespace EP
         {
             InitializeComponent();
             client = new DataBase.DataBaseClient();
+            parser = new CodeParser();
             _f1 = f1;
             
         }
@@ -39,6 +41,10 @@ namespace EP
                 }
             }
             return false;
+        }
+        private void CreateMethod(string name)
+        {
+            textBox4.Text = "namespace Task{" + Environment.NewLine +  "    class User{" + Environment.NewLine + "      public static int " +name + "(){" + Environment.NewLine + "      }" + Environment.NewLine + "    }" + Environment.NewLine+"}";
         }
         public void ContactListRefresher() // Обновление списка контактов
         {
@@ -137,7 +143,7 @@ namespace EP
             ContactListRefresher();
         }
 
-        private void button2_Click(object sender, EventArgs e) // Отправка ответа на сервер для проверки
+        /*private void button2_Click(object sender, EventArgs e) // Отправка ответа на сервер для проверки
         {
             try {
                 if (textBox3.Text != "")
@@ -154,7 +160,7 @@ namespace EP
             {
                 MessageBox.Show("Please, enter a digit!");
             }
-        }
+        }*/
 
         private void button3_Click(object sender, EventArgs e) // вызов нового окна (если не ясно)
         {
@@ -181,11 +187,38 @@ namespace EP
         {
             taskIndex = TaskBox.SelectedIndex;
             textBox2.Text = tasks[taskIndex].text;
+            CreateMethod(tasks[taskIndex].name);
         }
 
         private void button1_Click(object sender, EventArgs e)//Refresher программы
         {
-            GetList();
+        }
+
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+            
+        }
+        private void textBox4_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+        }
+        private void button2_Click(object sender, EventArgs e)
+        {
+            string[] result = new string[100];
+            if (textBox4.Text != "")
+            {
+                result = client.AnswerCheck(taskIndex, textBox4.Text);
+            }
+            foreach(string str in result)
+            {
+                MessageBox.Show(str);
+            }
+           
+        }
+
+        private void textBox4_KeyPress_1(object sender, KeyPressEventArgs e)
+        {
+
         }
     }
 }

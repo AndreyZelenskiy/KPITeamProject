@@ -23,7 +23,7 @@ namespace Server
         string[] GetUserByLogin(string login);
 
         [OperationContract]
-        bool AnswerCheck(int id, int answer);
+        List<string> AnswerCheck(int id, string source);
 
         [OperationContract]
         Dictionary<int, string[]> TaskList();

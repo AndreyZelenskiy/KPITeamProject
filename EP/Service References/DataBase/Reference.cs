@@ -46,10 +46,10 @@ namespace EP.DataBase {
         System.Threading.Tasks.Task<string[]> GetUserByLoginAsync(string login);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataBase/AnswerCheck", ReplyAction="http://tempuri.org/IDataBase/AnswerCheckResponse")]
-        bool AnswerCheck(int id, int answer);
+        string[] AnswerCheck(int id, string source);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataBase/AnswerCheck", ReplyAction="http://tempuri.org/IDataBase/AnswerCheckResponse")]
-        System.Threading.Tasks.Task<bool> AnswerCheckAsync(int id, int answer);
+        System.Threading.Tasks.Task<string[]> AnswerCheckAsync(int id, string source);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataBase/TaskList", ReplyAction="http://tempuri.org/IDataBase/TaskListResponse")]
         System.Collections.Generic.Dictionary<int, string[]> TaskList();
@@ -155,12 +155,12 @@ namespace EP.DataBase {
             return base.Channel.GetUserByLoginAsync(login);
         }
         
-        public bool AnswerCheck(int id, int answer) {
-            return base.Channel.AnswerCheck(id, answer);
+        public string[] AnswerCheck(int id, string source) {
+            return base.Channel.AnswerCheck(id, source);
         }
         
-        public System.Threading.Tasks.Task<bool> AnswerCheckAsync(int id, int answer) {
-            return base.Channel.AnswerCheckAsync(id, answer);
+        public System.Threading.Tasks.Task<string[]> AnswerCheckAsync(int id, string source) {
+            return base.Channel.AnswerCheckAsync(id, source);
         }
         
         public System.Collections.Generic.Dictionary<int, string[]> TaskList() {

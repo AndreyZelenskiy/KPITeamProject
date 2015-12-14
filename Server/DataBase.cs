@@ -1,14 +1,19 @@
-﻿using System;
+﻿
+using System;
 using System.Security.Cryptography;
 using System.Data;
 using System.Text;
 using MySql.Data.MySqlClient;
 using System.Collections.Generic;
+using System.Reflection;
+using System.CodeDom.Compiler;
+using System.IO;
+using Microsoft.CSharp;
 
 namespace Server
 {
 
-    class DataBase : IDataBase
+    public class DataBase : IDataBase
     {
         private MySqlConnection _connection;
 
@@ -91,6 +96,60 @@ namespace Server
             result[4] = Convert.ToString(row["id_user"]);
             return result;
         }
+
+        public List<string> AnswerCheck(int id, string source)
+        {
+            string fileName = @"c:\Test\"+DateTime.Now.Ticks+".dll";
+            
+            Task task = new Task(id);
+
+            //Configure compiler
+            Dictionary<string, string> CompilerOptions = new Dictionary<string, string>
+            {
+                {"CompilerVersion", "v3.5" }
+            };
+
+            CSharpCodeProvider provider = new CSharpCodeProvider(CompilerOptions);
+
+            CompilerParameters compileParam = new CompilerParameters
+            {
+                OutputAssembly = fileName,
+                GenerateExecutable = false
+            };
+
+            CompilerResults result = provider.CompileAssemblyFromSource(compileParam, source);
+            provider.Dispose();
+
+            //check result of compile
+            if (result.Errors.Count != 0)
+            {
+                List<string> list = new List<string>();
+                foreach (CompilerError err in result.Errors)
+                    list.Add(err.ToString());
+                return list;
+            }
+
+            //Invoke user method
+            Assembly assembly = result.CompiledAssembly;
+            Type type = assembly.GetType("Task.User");
+            if (type == null)
+            {
+                throw new Exception("Type not found!");
+            }
+            MethodInfo method = type.GetMethod(task.MethodName);
+            if (method != null)
+            {
+                //Check answer
+                int res = (int)method.Invoke(null, null);
+                if (res == task.Answer)
+                    return new List<string> { "true" };
+                else
+                    return new List<string> { "false" };
+            }
+            else
+                throw new Exception("method not found!");
+        }
+
         public string[] GetUserByLogin(string login)
         {
             string[] result = null;
@@ -257,7 +316,7 @@ namespace Server
 
             return 0;
         }
-        private DataTable GetQuery(string query)
+        public DataTable GetQuery(string query)
         {
             DataTable dt = null;
             try

@@ -53,7 +53,6 @@ namespace EP
                         break;
                     }
                 default:
-                    MessageBox.Show("Succed!");
                     ClientForm InClient = new ClientForm(this);
                     this.Hide();
                     InClient.Show();
